@@ -1,38 +1,46 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <script src="../build/react.development.js"></script>
-    <script src="../build/react-dom.development.js"></script>
-    <script src="../build/babel.min.js"></script>
-  </head>
-  <body>
-    <div id="example"></div>
-    <!-- https://reactjs.org/docs/refs-and-the-dom.html#callback-refs -->
-    <script type="text/babel">
-      class MyComponent extends React.Component {
-        constructor(props) {
-          super(props);
-          this.myTextInput = React.createRef();
-          this.handleClick = this.handleClick.bind(this)
-        }
-        handleClick() {
-          this.myTextInput.current.focus();
-        }
-        render() {
-          return (
-            <div>
-              <input type="text" ref={this.myTextInput} />
-              <input type="button" value="Focus the text input" onClick={this.handleClick} />
-            </div>
-          );
-        }
-      }
 
-      ReactDOM.render(
-        <MyComponent />,
-        document.getElementById('example')
-      );
-    </script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <script src="../build/react.development.js"></script>
+  <script src="../build/react-dom.development.js"></script>
+  <script src="../build/babel.min.js"></script>
+</head>
+
+<body>
+  <div id="example"></div>
+  <!-- https://reactjs.org/docs/refs-and-the-dom.html#callback-refs -->
+  <script type="text/babel">
+    class MyComponent extends React.Component {
+      constructor(props) {
+        super(props);
+        this.myTextInput = React.createRef();
+        this.handleClick = this.handleClick.bind(this)
+      }
+      handleClick() {
+        this.myTextInput.current.focus();
+      }
+      render() {
+        return (
+          <div>
+            <input type="text" ref={this.myTextInput} />
+            <input type="button" value="Focus the text input" onClick={this.handleClick} />
+          </div>
+        );
+      }
+    }
+
+    ReactDOM.render(
+      <MyComponent />,
+      document.getElementById('example')
+    );
+  </script>
+</body>
+
 </html>
+<!-- 
+  keyword:查找dom节点
+  1.有时您需要在组件中引用 DOM 节点。React 为您提供了ref将 DOM 节点附加到由React.createRef()
+  2.请注意，只有在将此组件安装到 DOM 后才能执行此操作，否则您会得到null.
+ -->

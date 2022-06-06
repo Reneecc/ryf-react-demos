@@ -1,48 +1,65 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <script src="../build/react.development.js"></script>
-    <script src="../build/react-dom.development.js"></script>
-    <script src="../build/babel.min.js"></script>
-  </head>
-  <body>
-    <div id="example"></div>
-    <script type="text/babel">
-      class Hello extends React.Component {
-        constructor(props) {
-          super(props)
-          this.state = {
-            opacity: 1.0
-          };
-        }
 
-        componentDidMount() {
-          this.timer = setInterval(function () {
-            var opacity = this.state.opacity;
-            opacity -= .05;
-            if (opacity < 0.1) {
-              opacity = 1.0;
-            }
-            this.setState({
-              opacity: opacity
-            });
-          }.bind(this), 100);
-        }
+<head>
+  <meta charset="UTF-8" />
+  <script src="../build/react.development.js"></script>
+  <script src="../build/react-dom.development.js"></script>
+  <script src="../build/babel.min.js"></script>
+</head>
 
-        render() {
-          return (
-            <div style={{opacity: this.state.opacity}}>
-              Hello {this.props.name}
-            </div>
-          );
-        }
+<body>
+  <div id="example"></div>
+  <script type="text/babel">
+    class Hello extends React.Component {
+      constructor(props) {
+        super(props)
+        this.state = {
+          opacity: 1.0
+        };
       }
-        
-      ReactDOM.render(
-        <Hello name="world"/>,
-        document.getElementById('example')
-      );
-    </script>
-  </body>
+
+      // 在初始渲染发生后触发一次
+      componentDidMount() {
+        this.timer = setInterval(function () {
+          var opacity = this.state.opacity;
+          // 0.05递减
+          opacity -= .05;
+          if (opacity < 0.1) {
+            opacity = 1.0;
+          }
+          this.setState({
+            opacity: opacity
+          });
+        }.bind(this), 1000);
+      }
+
+      render() {
+        return (
+          <div style={{ opacity: this.state.opacity }}>
+            Hello {this.props.name}
+          </div>
+        );
+      }
+    }
+
+    ReactDOM.render(
+      <Hello name="world" />,
+      document.getElementById('example')
+    );
+  </script>
+</body>
+
 </html>
+<!-- 
+  keyword:组件生命周期
+  1.组件的生命周期有三个主要部分：挂载（插入 DOM）、更新（重新渲染）和卸载（从 DOM 中删除）。React 提供了这些生命周期部分的钩子。will方法在某事发生之前被调用，而did方法在某事发生之后被调用。
+  2.生命周期方法的完整列表
+  componentWillMount()：在初始渲染发生之前触发一次。连接消息侦听器的好地方。this.setState在这里不起作用。
+  componentDidMount()：在初始渲染发生后触发一次。可以使用this.getDOMNode()。
+  componentWillUpdate(object nextProps, object nextState)：在组件对 DOM 进行更新后触发。可this.getDOMNode()用于更新。
+  componentDidUpdate(object prevProps, object prevState)：在组件的更新刷新到 DOM 后立即调用。初始渲染不调用此方法。当组件更新时，将此作为对 DOM 进行操作的机会。
+  componentWillUnmount()：在组件从 DOM 中卸载之前立即触发。删除消息侦听器或进行一般清理的好地方。
+  componentWillReceiveProps(object nextProps)：当组件接收新道具时触发。您可能需要this.setState依赖道具。
+  shouldComponentUpdate(object nextProps, object nextState)：在接收到新的道具或状态时在渲染之前触发。return false如果您知道不需要更新。
+ -->

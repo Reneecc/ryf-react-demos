@@ -1,24 +1,56 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <script src="../build/react.development.js"></script>
-    <script src="../build/react-dom.development.js"></script>
-    <script src="../build/babel.min.js"></script>
-  </head>
-  <body>
-    <div id="example"></div>
-    <script type="text/babel">
-      class HelloMessage extends React.Component {
-        render() {
-          return <h1>Hello {this.props.name}</h1>;
-        }
-      }
 
-      ReactDOM.render(
-        <HelloMessage name="John" />,
-        document.getElementById('example')
-      );
-    </script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <script src="../build/react.development.js"></script>
+  <script src="../build/react-dom.development.js"></script>
+  <script src="../build/babel.min.js"></script>
+</head>
+
+<body>
+  <div id="example"></div>
+  <script type="text/babel">
+    class HelloMessage extends React.Component {
+      render() {
+        return <h1>Hello {this.props.name}</h1>;
+      }
+    }
+
+    ReactDOM.render(
+      <HelloMessage name="John" />,
+      document.getElementById('example')
+    );
+  </script>
+</body>
+
 </html>
+
+<!-- 
+  keyword:定义一个组件
+  1.class ComponentName extends React.Component创建一个组件类，它实现了一个渲染方法来返回该类的一个组件实例。
+  2.在 v16.0 之前，React 使用React.createClass()创建组件类。它已被弃用
+  3.组件名第一个字母必须大写，否则react会抛出错误
+  4.一个react组件只有一个顶级子节点
+
+  // correct：
+    class HelloMessage extends React.Component {
+    render() {
+      return <div>
+        <h1>Hello {this.props.name}</h1>
+        <p>some text</p>
+      </div>;
+    }
+  }
+
+  // wrong
+  class HelloMessage extends React.Component {
+    render() {
+      return <h1>
+        Hello {this.props.name}
+      </h1><p>
+        some text
+      </p>;
+    }
+  }
+ -->

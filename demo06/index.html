@@ -1,33 +1,49 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <script src="../build/react.development.js"></script>
-    <script src="../build/react-dom.development.js"></script>
-    <script src="../build/babel.min.js"></script>
-    <script src="../build/prop-types.js"></script>
-  </head>
-  <body>
-    <div id="example"></div>
-    <script type="text/babel">
 
-      var data = 123;
+<head>
+  <meta charset="UTF-8" />
+  <script src="../build/react.development.js"></script>
+  <script src="../build/react-dom.development.js"></script>
+  <script src="../build/babel.min.js"></script>
+  <script src="../build/prop-types.js"></script>
+</head>
 
-      class MyTitle extends React.Component {
-        static propTypes = {
-          title: PropTypes.string.isRequired,
-        }
-        render() {
-          return <h1> {this.props.title} </h1>;
-        }
+<body>
+  <div id="example"></div>
+  <script type="text/babel">
+
+    // var data = '123';
+    var data = 123;
+
+    class MyTitle extends React.Component {
+      static propTypes = {
+        title: PropTypes.string.isRequired,
       }
+      static defaultProps = {
+        title: 'Hello World',
+      }
+      render() {
+        return <h1> {this.props.title} </h1>;
+      }
+    }
 
-      ReactDOM.render(
-        <MyTitle title={data} />,
-        document.getElementById('example')
-      );
+    ReactDOM.render(
+      <div>
+        <MyTitle title={data} />
+        <MyTitle />
+      </div>,
+      document.getElementById('example')
+    );
 
-    </script>
-  </body>
+  </script>
+</body>
+
 </html>
-
+<!-- 
+  keyword:道具类型
+  1.title. PropTypes 告诉 React 标题是必需的，它的值应该是一个字符串
+  2.Warning: Failed propType: Invalid prop `title` of type `number` supplied to `MyTitle`, expected `string`.
+  3.如果想给一个默认值，使用defaultProps
+  4.自 React v15.5 以来，React.PropTypes 已移至不同的包中
+ -->

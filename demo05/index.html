@@ -1,36 +1,48 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <script src="../build/react.development.js"></script>
-    <script src="../build/react-dom.development.js"></script>
-    <script src="../build/babel.min.js"></script>
-  </head>
-  <body>
-    <div id="example"></div>
-    <script type="text/babel">
-      class NotesList extends React.Component {
-        render() {
-          return (
-            <ol>
-              {
-                React.Children.map(this.props.children, function (child) {
-                  return <li>{child}</li>;
-                })
-              }
-            </ol>
-          );
-        }
-      }
 
-      ReactDOM.render(
-        <NotesList>
-          <span>hello</span>
-          <span>world</span>
-        </NotesList>,
-        document.getElementById('example')
-      );
-    </script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <script src="../build/react.development.js"></script>
+  <script src="../build/react-dom.development.js"></script>
+  <script src="../build/babel.min.js"></script>
+</head>
+
+<body>
+  <div id="example"></div>
+  <script type="text/babel">
+    // 组件实例
+    class NotesList extends React.Component {
+      render() {
+        return (
+          // ol 有序列表 ul无序列表
+          <ul>
+            {
+              React.Children.map(this.props.children, function (child) {
+                return <li>{child}</li>;
+              })
+            }
+          </ul>
+        );
+      }
+    }
+
+    ReactDOM.render(
+      <NotesList>
+        <span>hello</span>
+        <span>world</span>
+      </NotesList>,
+      document.getElementById('example')
+    );
+  </script>
+</body>
+
 </html>
 
+<!-- 
+  keyword:this.props.children
+  1.this.props.children 访问组件的子节点
+  2.this.props.children具有三种可能性。如果组件没有子节点，则值为undefined; 如果是单个子节点，则为对象；如果有多个子节点，则为数组。你应该小心处理它
+  3.React 为我们提供React.Children了处理this.props.children' 的不透明数据结构的实用程序。
+  使用React.Children.map迭代this.props.children而不用担心它的数据类型是undefinedor object
+ -->

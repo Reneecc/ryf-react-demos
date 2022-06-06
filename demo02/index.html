@@ -1,26 +1,36 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <script src="../build/react.development.js"></script>
-    <script src="../build/react-dom.development.js"></script>
-    <script src="../build/babel.min.js"></script>
-  </head>
-  <body>
-    <div id="example"></div>
-    <script type="text/babel">
-      var names = ['Alice', 'Emily', 'Kate'];
 
-      ReactDOM.render(
-        <div>
+<head>
+  <meta charset="UTF-8" />
+  <script src="../build/react.development.js"></script>
+  <script src="../build/react-dom.development.js"></script>
+  <script src="../build/babel.min.js"></script>
+</head>
+
+<body>
+  <div id="example"></div>
+  <script type="text/babel">
+    var names = ['Alice', 'Emily', 'Kate'];
+
+    ReactDOM.render(
+      <div>
         {
           names.map(function (name, index) {
             return <div key={index}>Hello, {name}!</div>
           })
         }
-        </div>,
-        document.getElementById('example')
-      );
-    </script>
-  </body>
+      </div>,
+      document.getElementById('example')
+    );
+  </script>
+</body>
+
 </html>
+
+<!-- 
+  keyword:在JSX中使用JavaScript
+  1.可以在JSX中使用javascript
+  2.< 是html语法的开头
+  3.{ 是javascript语法的开头
+ -->

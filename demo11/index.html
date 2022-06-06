@@ -1,47 +1,55 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <script src="../build/react.development.js"></script>
-    <script src="../build/react-dom.development.js"></script>
-    <script src="../build/babel.min.js"></script>
-    <script src="../build/jquery.min.js"></script>
-  </head>
-  <body>
-    <div id="example"></div>
-    <script type="text/babel">
-      class UserGist extends React.Component {
-        constructor(props) {
-          super(props)
-          this.state = {
-            username: '',
-            lastGistUrl: ''
-          }
-        }
 
-        componentDidMount() {
-          $.get(this.props.source, function(result) {
-            var lastGist = result[0];
-            this.setState({
-              username: lastGist.owner.login,
-              lastGistUrl: lastGist.html_url
-            });
-          }.bind(this));
-        }
+<head>
+  <meta charset="UTF-8" />
+  <script src="../build/react.development.js"></script>
+  <script src="../build/react-dom.development.js"></script>
+  <script src="../build/babel.min.js"></script>
+  <script src="../build/jquery.min.js"></script>
+</head>
 
-        render() {
-          return (
-            <div>
-              {this.state.username}'s last gist is <a href={this.state.lastGistUrl}>here</a>.
-            </div>
-          );
+<body>
+  <div id="example"></div>
+  <script type="text/babel">
+    class UserGist extends React.Component {
+      constructor(props) {
+        super(props)
+        this.state = {
+          username: '',
+          lastGistUrl: ''
         }
       }
 
-      ReactDOM.render(
-        <UserGist source="https://api.github.com/users/octocat/gists" />,
-        document.getElementById('example')
-      );
-    </script>
-  </body>
+      componentDidMount() {
+        //get请求获取json连接中的信息
+        $.get(this.props.source, function (result) {
+          var lastGist = result[0];
+          this.setState({
+            username: lastGist.owner.login,
+            lastGistUrl: lastGist.html_url
+          });
+        }.bind(this));
+      }
+
+      render() {
+        return (
+          <div>
+            {this.state.username}'s last gist is <a href={this.state.lastGistUrl}>here</a>.
+          </div>
+        );
+      }
+    }
+
+    ReactDOM.render(
+      <UserGist source="https://api.github.com/users/octocat/gists" />,
+      document.getElementById('example')
+    );
+  </script>
+</body>
+
 </html>
+<!-- 
+  keyword:ajax
+  1.如何从服务器或 API 提供者获取组件的数据？答案是使用 Ajax 在componentDidMount. 当服务器响应到达时，存储数据this.setState()以触发 UI 的重新呈现。
+ -->
